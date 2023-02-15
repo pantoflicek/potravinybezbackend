@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
                 .build();
         userRepository.save(newUser);
         return CreateUserResponse.builder()
-                .id(newUser.getId())
+                .id(userRepository.findByUsernameIsLike(newUser.getUsername()).getId())
                 .build();
     }
 
