@@ -2,7 +2,7 @@ package cz.vse.potravinyBEZ.service.impl;
 
 import cz.vse.potravinyBEZ.domain.converter.EntityToUserConverter;
 import cz.vse.potravinyBEZ.domain.user.*;
-import cz.vse.potravinyBEZ.repository.UserRepository;
+import cz.vse.potravinyBEZ.repository.UserRepo;
 import cz.vse.potravinyBEZ.repository.entity.UserEntity;
 import cz.vse.potravinyBEZ.service.UserService;
 
@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
-    private final UserRepository userRepository;
+    private final UserRepo userRepo;
 
     @Override
     public CreateUserResponse createUser(CreateUserRequest user) {
@@ -27,15 +27,15 @@ public class UserServiceImpl implements UserService {
                 .password(user.getPassword())
                 .email(user.getEmail())
                 .build();
-        userRepository.save(newUser);
+        userRepo.save(newUser);
         return CreateUserResponse.builder()
-                .id(userRepository.findByUsernameIsLike(newUser.getUsername()).getId())
+                .id(userRepo.findByUsernameIsLike(newUser.getUsername()).getId())
                 .build();
     }
 
     @Override
     public GetAllUsersResponse getAllUsers() {
-        List<User> users = userRepository.findAll().stream()
+        List<User> users = userRepo.findAll().stream()
                 .map(EntityToUserConverter::convert)
                 .toList();
         return GetAllUsersResponse.builder()
@@ -45,9 +45,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public DeleteUserResponse deleteUserById(int id) {
-        UserEntity userToDelete = userRepository.findById(id);
+        UserEntity userToDelete = userRepo.findById(id);
         assert userToDelete != null;
-        userRepository.delete(userToDelete);
+        userRepo.delete(userToDelete);
         return DeleteUserResponse.builder()
                 .name(userToDelete.getUsername())
                 .build();
