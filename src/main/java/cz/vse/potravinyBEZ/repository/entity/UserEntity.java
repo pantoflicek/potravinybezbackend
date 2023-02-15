@@ -20,12 +20,13 @@ public class UserEntity {
     @Id
     @Column(name = "id")
     private int id;
-
     @Length(min = 2, max = 45)
     @Column(name = "username")
     private String username;
-
     @Length(min = 2, max = 60)
     @Column(name = "password")
     private String password;
+    @Length(min = 2, max = 60)
+    @Column(name = "email")
+    private String email;
 }
