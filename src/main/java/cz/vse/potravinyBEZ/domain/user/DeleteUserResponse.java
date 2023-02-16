@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 @Builder
 public class DeleteUserResponse {
-    private String name;
+    private String response;
 }

@@ -1,10 +1,7 @@
 package cz.vse.potravinyBEZ.controller;
 
 //Spring
-import cz.vse.potravinyBEZ.domain.user.CreateUserRequest;
-import cz.vse.potravinyBEZ.domain.user.CreateUserResponse;
-import cz.vse.potravinyBEZ.domain.user.DeleteUserResponse;
-import cz.vse.potravinyBEZ.domain.user.GetAllUsersResponse;
+import cz.vse.potravinyBEZ.domain.user.*;
 import cz.vse.potravinyBEZ.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
@@ -33,8 +30,8 @@ public class UserController {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-    @DeleteMapping(path = "{id}")
-    public DeleteUserResponse deleteUserById(@PathVariable("id") int id){
-        return userService.deleteUserById(id);
+    @DeleteMapping
+    public DeleteUserResponse deleteUserById(@Valid @NonNull @RequestBody DeleteUserRequest deleteUserRequest){
+        return userService.deleteUserById(deleteUserRequest);
     }
 }

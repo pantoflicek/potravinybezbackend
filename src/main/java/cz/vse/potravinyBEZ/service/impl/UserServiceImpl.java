@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 //Java
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -27,10 +28,24 @@ public class UserServiceImpl implements UserService {
                 .password(user.getPassword())
                 .email(user.getEmail())
                 .build();
-        userRepo.save(newUser);
-        return CreateUserResponse.builder()
-                .id(userRepo.findByUsernameIsLike(newUser.getUsername()).getId())
-                .build();
+        UserEntity isExisting = userRepo.findByUsernameIsLike(newUser.getUsername());
+        UserEntity isExistingByEmail = userRepo.findByEmailIsLike(newUser.getEmail());
+        if (Objects.isNull(isExisting)){
+            if (Objects.isNull(isExistingByEmail)){
+                userRepo.save(newUser);
+                return CreateUserResponse.builder()
+                        .response("User: " + newUser.getUsername() + " has been created with id: " + userRepo.findByUsernameIsLike(newUser.getUsername()).getId())
+                        .build();
+            } else {
+                return CreateUserResponse.builder()
+                        .response("Email is already taken!")
+                        .build();
+            }
+        } else {
+            return CreateUserResponse.builder()
+                    .response("Username is already taken!")
+                    .build();
+        }
     }
 
     @Override
@@ -44,12 +59,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public DeleteUserResponse deleteUserById(int id) {
-        UserEntity userToDelete = userRepo.findById(id);
-        assert userToDelete != null;
-        userRepo.delete(userToDelete);
-        return DeleteUserResponse.builder()
-                .name(userToDelete.getUsername())
-                .build();
+    public DeleteUserResponse deleteUserById(DeleteUserRequest user) {
+        UserEntity userToDelete = userRepo.findByUsernameIsLike(user.getUsername());
+        if (userToDelete == null){
+            return DeleteUserResponse.builder()
+                    .response("Specified user does not exists!")
+                    .build();
+        } else {
+            userRepo.delete(userToDelete);
+            return DeleteUserResponse.builder()
+                    .response("User: " + userToDelete.getUsername() + " has been deleted!")
+                    .build();
+        }
     }
 }
