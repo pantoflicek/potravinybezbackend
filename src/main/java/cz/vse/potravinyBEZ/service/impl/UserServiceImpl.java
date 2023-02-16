@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public DeleteUserResponse deleteUserById(DeleteUserRequest user) {
+    public DeleteUserResponse deleteUserByName(DeleteUserRequest user) {
         UserEntity userToDelete = userRepo.findByUsernameIsLike(user.getUsername());
         if (userToDelete == null){
             return DeleteUserResponse.builder()

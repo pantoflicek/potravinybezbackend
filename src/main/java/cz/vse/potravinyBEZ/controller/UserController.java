@@ -32,6 +32,6 @@ public class UserController {
 
     @DeleteMapping
     public DeleteUserResponse deleteUserById(@Valid @NonNull @RequestBody DeleteUserRequest deleteUserRequest){
-        return userService.deleteUserById(deleteUserRequest);
+        return userService.deleteUserByName(deleteUserRequest);
     }
 }
