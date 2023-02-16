@@ -58,6 +58,7 @@ public class AllergenServiceImpl implements AllergenService {
                     .response("Specified allergen does not exists!")
                     .build();
         } else {
+            allergenRepo.delete(allergenToDelete);
             return DeleteAllergenResponse.builder()
                     .response("Allergen: " + allergenToDelete.getName() + " has been deleted!")
                     .build();
