@@ -58,6 +58,7 @@ public class ProducerServiceImpl implements ProducerService {
                     .response("Specified producer does not exists!")
                     .build();
         } else {
+            producerRepo.delete(producerToDelete);
             return DeleteProducerResponse.builder()
                     .response("Producer: " + producerToDelete.getName() + " has been deleted!")
                     .build();
