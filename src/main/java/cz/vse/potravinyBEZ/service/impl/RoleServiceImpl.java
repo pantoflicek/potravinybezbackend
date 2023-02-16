@@ -9,9 +9,14 @@ import cz.vse.potravinyBEZ.repository.entity.RoleEntity;
 import cz.vse.potravinyBEZ.repository.entity.UserEntity;
 import cz.vse.potravinyBEZ.repository.entity.UserRoleEntity;
 import cz.vse.potravinyBEZ.service.RoleService;
+
+//Lombok
 import lombok.AllArgsConstructor;
+
+//Spring
 import org.springframework.stereotype.Service;
 
+//Java
 import java.util.List;
 import java.util.Objects;
 
@@ -74,16 +79,28 @@ public class RoleServiceImpl implements RoleService {
                 .user(addingUser)
                 .role(addingRole)
                 .build();
-        UserRoleEntity isExisting = userRoleRepo.findByUserAndRole(addingUser.getId(), addingRole.getId());
-        if (Objects.isNull(isExisting)){
-            userRoleRepo.save(userRoleEntity);
+        if (addingUser == null){
             return AddRoleToUserResponse.builder()
-                    .response("Role: " + addingRole.getName() + " has been added to user: " + addingUser.getUsername() + "!")
+                    .response("Specified user does not exists!")
                     .build();
-        } else {
+        }
+        else if (addingRole == null){
             return AddRoleToUserResponse.builder()
-                    .response("Specified user already has this role!")
+                    .response("Specified roel does not exists!")
                     .build();
+        }
+        else {
+            UserRoleEntity isExisting = userRoleRepo.findByUserAndRole(addingUser.getId(), addingRole.getId());
+            if (Objects.isNull(isExisting)){
+                userRoleRepo.save(userRoleEntity);
+                return AddRoleToUserResponse.builder()
+                        .response("Role: " + addingRole.getName() + " has been added to user: " + addingUser.getUsername() + "!")
+                        .build();
+            } else {
+                return AddRoleToUserResponse.builder()
+                        .response("Specified user already has this role!")
+                        .build();
+            }
         }
     }
 
@@ -91,25 +108,35 @@ public class RoleServiceImpl implements RoleService {
     public DeleteUserRoleResponse deleteUserRole(DeleteUserRoleRequest request) {
         RoleEntity deletingRole = roleRepo.findByNameIsLike(request.getRole());
         UserEntity deletingUser = userRepo.findByUsernameIsLike(request.getUsername());
-        UserRoleEntity entityToDelete = userRoleRepo.findByUserAndRole(deletingUser.getId(), deletingRole.getId());
-        if (Objects.isNull(entityToDelete)){
-            return DeleteUserRoleResponse
-                    .builder()
-                    .response("User does not have the specified role!")
+        if (deletingUser == null){
+            return DeleteUserRoleResponse.builder()
+                    .response("Specified user does not exists!")
+                    .build();
+        }
+        else if (deletingRole == null){
+            return DeleteUserRoleResponse.builder()
+                    .response("Specified role does not exists!")
                     .build();
         } else {
-            userRoleRepo.delete(entityToDelete);
-            return DeleteUserRoleResponse
-                    .builder()
-                    .response("Role: " + deletingRole.getName() + " was deleted from user: " + deletingUser.getUsername())
-                    .build();
+            UserRoleEntity entityToDelete = userRoleRepo.findByUserAndRole(deletingUser.getId(), deletingRole.getId());
+            if (Objects.isNull(entityToDelete)){
+                return DeleteUserRoleResponse
+                        .builder()
+                        .response("User does not have the specified role!")
+                        .build();
+            } else {
+                userRoleRepo.delete(entityToDelete);
+                return DeleteUserRoleResponse
+                        .builder()
+                        .response("Role: " + deletingRole.getName() + " was deleted from user: " + deletingUser.getUsername())
+                        .build();
+            }
         }
     }
 
     @Override
     public GetAllUsersRoleResponse getAllUsersRole(GetAllUsersRolesRequest request) {
         UserEntity user = userRepo.findByUsernameIsLike(request.getUsername());
-        System.out.println(user.getUsername());
         List<String> list = userRoleRepo.findAllRolesByUserIdIsLike(user.getId());
         return GetAllUsersRoleResponse.builder().roles(list).build();
     }
