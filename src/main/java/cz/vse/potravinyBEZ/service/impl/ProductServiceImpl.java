@@ -1,6 +1,6 @@
 package cz.vse.potravinyBEZ.service.impl;
 
-//Lombok
+
 import cz.vse.potravinyBEZ.domain.converter.EntityToProductConverter;
 import cz.vse.potravinyBEZ.domain.product.*;
 import cz.vse.potravinyBEZ.repository.ProducerRepo;
@@ -8,6 +8,8 @@ import cz.vse.potravinyBEZ.repository.ProductRepo;
 import cz.vse.potravinyBEZ.repository.entity.ProducerEntity;
 import cz.vse.potravinyBEZ.repository.entity.ProductEntity;
 import cz.vse.potravinyBEZ.service.ProductService;
+
+//Lombok
 import lombok.AllArgsConstructor;
 
 //Spring
