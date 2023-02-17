@@ -15,7 +15,7 @@ public class ProductEntity {
     @Id
     @Column(name = "id")
     private int id;
-    @Length(min = 2, max = 45)
+    @Length(min = 2, max = 200)
     @Column(name = "name")
     private String name;
     @Length(min = 2, max = 1024)
