@@ -86,7 +86,7 @@ public class RoleServiceImpl implements RoleService {
         }
         else if (addingRole == null){
             return AddRoleToUserResponse.builder()
-                    .response("Specified roel does not exists!")
+                    .response("Specified role does not exists!")
                     .build();
         }
         else {

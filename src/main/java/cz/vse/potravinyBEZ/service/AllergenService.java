@@ -6,4 +6,7 @@ public interface AllergenService {
     CreateAllergenResponse createAllergen(CreateAllergenRequest allergen);
     GetAllAllergenResponse getAllAllergens();
     DeleteAllergenResponse deleteAllergen(DeleteAllergenRequest allergen);
+    AddAllergenToProductResponse addAllergenToProduct(AddAllergenToProductRequest request);
+    DeleteProductAllergenResponse deleteProductAllergen(DeleteProductAllergenRequest request);
+    GetAllProductAllergensResponse getAllProductAllergen(GetAllProductAllergensRequest request);
 }
