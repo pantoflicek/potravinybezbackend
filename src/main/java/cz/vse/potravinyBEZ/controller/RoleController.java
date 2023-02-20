@@ -43,7 +43,7 @@ public class RoleController {
     }
 
     @PostMapping("/userRoles")
-    public GetAllUsersRoleResponse getAllUsersRoleResponse(@Valid @NonNull @RequestBody GetAllUsersRolesRequest getAllUsersRolesRequest){
+    public GetAllUsersRoleResponse getAllUsersRole(@Valid @NonNull @RequestBody GetAllUsersRolesRequest getAllUsersRolesRequest){
         return roleService.getAllUsersRole(getAllUsersRolesRequest);
     }
 

@@ -35,4 +35,19 @@ public class AllergenController {
     public GetAllAllergenResponse getAllAllergen(){
         return allergenService.getAllAllergens();
     }
+
+    @PutMapping("/addAllergen")
+    public AddAllergenToProductResponse addAllergenToProduct(@Valid @NonNull @RequestBody AddAllergenToProductRequest addAllergenToProductRequest){
+        return allergenService.addAllergenToProduct(addAllergenToProductRequest);
+    }
+
+    @PostMapping("/productAllergens")
+    public GetAllProductAllergensResponse getAllProductAllergens(@Valid @NonNull @RequestBody GetAllProductAllergensRequest getAllProductAllergensRequest){
+        return allergenService.getAllProductAllergen(getAllProductAllergensRequest);
+    }
+
+    @DeleteMapping("/productAllergenDelete")
+    public DeleteProductAllergenResponse deleteProductAllergen(@Valid @NonNull @RequestBody DeleteProductAllergenRequest deleteProductAllergenRequest){
+        return allergenService.deleteProductAllergen(deleteProductAllergenRequest);
+    }
 }
