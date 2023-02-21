@@ -1,4 +1,4 @@
-package cz.vse.potravinyBEZ.domain.role;
+package cz.vse.potravinyBEZ.domain.offer;
 
 //Persistence
 import jakarta.validation.constraints.NotBlank;
@@ -11,11 +11,13 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AddRoleToUserRequest {
+public class CreateOfferRequest {
     @NotBlank
     @Length(min = 2, max = 45)
-    private String username;
+    private String vendor;
     @NotBlank
-    @Length(min = 2, max = 45)
-    private String role;
+    @Length(min = 2, max = 200)
+    private String product;
+    @NotBlank
+    private int price;
 }
