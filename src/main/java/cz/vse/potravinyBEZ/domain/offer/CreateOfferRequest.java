@@ -18,6 +18,5 @@ public class CreateOfferRequest {
     @NotBlank
     @Length(min = 2, max = 200)
     private String product;
-    @NotBlank
     private int price;
 }
