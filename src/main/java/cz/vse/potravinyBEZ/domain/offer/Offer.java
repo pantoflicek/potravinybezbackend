@@ -1,7 +1,7 @@
 package cz.vse.potravinyBEZ.domain.offer;
-
 import cz.vse.potravinyBEZ.domain.product.Product;
 import cz.vse.potravinyBEZ.domain.vendor.Vendor;
+
 import lombok.*;
 
 @Data
