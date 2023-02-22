@@ -62,7 +62,7 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public DeleteReviewResponse deleteReview(DeleteReviewRequest review) {
         ProductEntity deletingProduct = productRepo.findByNameIsLike(review.getProduct());
-        UserEntity deletingUser = userRepo.findByUsernameIsLike(review.getProduct());
+        UserEntity deletingUser = userRepo.findByUsernameIsLike(review.getUser());
         if (deletingUser == null){
             return DeleteReviewResponse.builder()
                     .response("Specified user does not exists!")
