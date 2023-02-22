@@ -24,7 +24,7 @@ public class ReviewEntity {
     private Date date;
     @Length(min = 2, max = 1024)
     @Column(name = "text")
-    private String name;
+    private String text;
     @Column(name = "stars")
     private int stars;
     @ManyToOne
