@@ -111,10 +111,14 @@ public class OfferServiceImpl implements OfferService {
             System.out.println("No product found");
             return null;
         } else {
-            int lowestOffer = offerRepo.findLowestByProductId(product.getId());
-            return GetProductLowestPriceResponse.builder()
-                    .offer(lowestOffer)
-                    .build();
+            Integer lowestOffer = offerRepo.findLowestByProductId(product.getId());
+            if (lowestOffer == null){
+                return null;
+            } else {
+                return GetProductLowestPriceResponse.builder()
+                        .lowestOffer(lowestOffer)
+                        .build();
+            }
         }
     }
 
@@ -125,10 +129,14 @@ public class OfferServiceImpl implements OfferService {
             System.out.println("No product found");
             return null;
         } else {
-            int lowestOffer = offerRepo.findHighestByProductId(product.getId());
-            return GetProductHighestPriceResponse.builder()
-                    .offer(lowestOffer)
-                    .build();
+            Integer highestOffer = offerRepo.findHighestByProductId(product.getId());
+            if (highestOffer == null){
+                return null;
+            } else {
+                return GetProductHighestPriceResponse.builder()
+                        .highestOffer(highestOffer)
+                        .build();
+            }
         }
     }
 }

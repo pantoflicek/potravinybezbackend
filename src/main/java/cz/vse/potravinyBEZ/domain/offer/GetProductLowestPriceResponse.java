@@ -7,5 +7,5 @@ import lombok.Data;
 @Builder
 @Data
 public class GetProductLowestPriceResponse {
-    private int offer;
+    private int lowestOffer;
 }
