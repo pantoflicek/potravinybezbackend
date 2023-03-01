@@ -35,4 +35,9 @@ public class OfferController {
     public GetAllProductOffersResponse getAllProductOffers(@Valid @NonNull @RequestBody GetAllProductOffersRequest request){
         return offerService.getAllProductOffers(request);
     }
+
+    @PutMapping("/lowestPrice")
+    public GetProductLowestPriceResponse getProductLowestPrice(@Valid @NonNull @RequestBody GetProductLowestPriceRequest request){
+        return offerService.getProductLowestPrice(request);
+    }
 }

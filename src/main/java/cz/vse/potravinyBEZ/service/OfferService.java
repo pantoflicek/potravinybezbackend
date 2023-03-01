@@ -6,4 +6,5 @@ public interface OfferService {
     CreateOfferResponse createOffer(CreateOfferRequest offer);
     DeleteOfferResponse deleteOffer(DeleteOfferRequest offer);
     GetAllProductOffersResponse getAllProductOffers(GetAllProductOffersRequest request);
+    GetProductLowestPriceResponse getProductLowestPrice(GetProductLowestPriceRequest request);
 }
