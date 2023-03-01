@@ -117,4 +117,18 @@ public class OfferServiceImpl implements OfferService {
                     .build();
         }
     }
+
+    @Override
+    public GetProductHighestPriceResponse getProductHighestPrice(GetProductHighestPriceRequest request) {
+        ProductEntity product = productRepo.findByNameIsLike(request.getProduct());
+        if (product == null){
+            System.out.println("No product found");
+            return null;
+        } else {
+            int lowestOffer = offerRepo.findHighestByProductId(product.getId());
+            return GetProductHighestPriceResponse.builder()
+                    .offer(lowestOffer)
+                    .build();
+        }
+    }
 }

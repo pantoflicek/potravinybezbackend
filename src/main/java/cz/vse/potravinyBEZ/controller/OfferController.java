@@ -40,4 +40,9 @@ public class OfferController {
     public GetProductLowestPriceResponse getProductLowestPrice(@Valid @NonNull @RequestBody GetProductLowestPriceRequest request){
         return offerService.getProductLowestPrice(request);
     }
+
+    @PutMapping("/highestPrice")
+    public GetProductHighestPriceResponse getProductHighestPrice(@Valid @NonNull @RequestBody GetProductHighestPriceRequest request){
+        return offerService.getProductHighestPrice(request);
+    }
 }
