@@ -6,4 +6,5 @@ public interface ProductService {
     CreateProductResponse createProduct(CreateProductRequest product);
     GetAllProductsResponse getAllProducts();
     DeleteProductResponse deleteProduct(DeleteProductRequest product);
+    GetProductByProductIdResponse getProductByProductId(GetProductByProductIdRequest id);
 }

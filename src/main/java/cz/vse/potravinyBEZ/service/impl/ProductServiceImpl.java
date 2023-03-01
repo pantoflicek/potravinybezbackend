@@ -88,4 +88,19 @@ public class ProductServiceImpl implements ProductService {
                     .build();
         }
     }
+
+    @Override
+    public GetProductByProductIdResponse getProductByProductId(GetProductByProductIdRequest id) {
+        ProductEntity productEntity = productRepo.findByIdIsLike(id.getId());
+        if (Objects.isNull(productEntity)){
+            return GetProductByProductIdResponse.builder()
+                    .product(null)
+                    .build();
+        } else {
+            Product product = EntityToProductConverter.convert(productEntity);
+            return GetProductByProductIdResponse.builder()
+                    .product(product)
+                    .build();
+        }
+    }
 }

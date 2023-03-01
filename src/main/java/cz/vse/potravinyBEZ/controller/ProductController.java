@@ -35,4 +35,10 @@ public class ProductController {
     public GetAllProductsResponse getAllProducts(){
         return productService.getAllProducts();
     }
+
+    @PutMapping("/product")
+    public GetProductByProductIdResponse getProductByProductId(@Valid @NonNull @RequestBody GetProductByProductIdRequest getProductByProductIdRequest){
+        return productService.getProductByProductId(getProductByProductIdRequest);
+    }
+
 }
