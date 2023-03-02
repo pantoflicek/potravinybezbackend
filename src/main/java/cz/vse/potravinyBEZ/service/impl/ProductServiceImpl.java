@@ -29,39 +29,41 @@ public class ProductServiceImpl implements ProductService {
     public CreateProductResponse createProduct(CreateProductRequest product) {
         ProducerEntity addingProducer = producerRepo.findByNameIsLike(product.getProducer());
         if (Objects.isNull(addingProducer)){
-            return CreateProductResponse.builder()
-                    .response("Specified producer does not exists!")
+            ProducerEntity newProducer = ProducerEntity.builder()
+                    .name(product.getProducer())
+                    .build();
+            producerRepo.save(newProducer);
+            addingProducer = producerRepo.findByNameIsLike(product.getProducer());
+        }
+        ProductEntity newProduct = ProductEntity.builder()
+                .name(product.getName())
+                .imagePath(product.getImagePath())
+                .descriptionShort(product.getDescriptionShort())
+                .descriptionLong(product.getDescriptionLong())
+                .weight(product.getWeight())
+                .ingredients(product.getIngredients())
+                .producer(addingProducer)
+                .energy(product.getEnergy())
+                .fat(product.getFat())
+                .carbohydrate(product.getCarbohydrate())
+                .sugars(product.getSugars())
+                .fibre(product.getFibre())
+                .protein(product.getProtein())
+                .salt(product.getSalt())
+                .build();
+        ProductEntity isExisting = productRepo.findByNameIsLike(newProduct.getName());
+        if (Objects.isNull(isExisting)){
+            productRepo.save(newProduct);
+             return CreateProductResponse.builder()
+                    .response("Product: " + newProduct.getName() + " has been created!")
                     .build();
         } else {
-            ProductEntity newProduct = ProductEntity.builder()
-                    .name(product.getName())
-                    .imagePath(product.getImagePath())
-                    .descriptionShort(product.getDescriptionShort())
-                    .descriptionLong(product.getDescriptionLong())
-                    .weight(product.getWeight())
-                    .ingredients(product.getIngredients())
-                    .producer(addingProducer)
-                    .energy(product.getEnergy())
-                    .fat(product.getFat())
-                    .carbohydrate(product.getCarbohydrate())
-                    .sugars(product.getSugars())
-                    .fibre(product.getFibre())
-                    .protein(product.getProtein())
-                    .salt(product.getSalt())
+            return CreateProductResponse.builder()
+                    .response("Product already exists!")
                     .build();
-            ProductEntity isExisting = productRepo.findByNameIsLike(newProduct.getName());
-            if (Objects.isNull(isExisting)){
-                productRepo.save(newProduct);
-                 return CreateProductResponse.builder()
-                        .response("Product: " + newProduct.getName() + " has been created!")
-                        .build();
-            } else {
-                return CreateProductResponse.builder()
-                        .response("Product already exists!")
-                        .build();
-            }
         }
     }
+
 
     @Override
     public GetAllProductsResponse getAllProducts() {
