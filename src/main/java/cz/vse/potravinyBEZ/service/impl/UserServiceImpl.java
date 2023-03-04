@@ -10,6 +10,7 @@ import cz.vse.potravinyBEZ.service.UserService;
 import lombok.AllArgsConstructor;
 
 //Spring
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 //Java
@@ -21,11 +22,14 @@ import java.util.Objects;
 public class UserServiceImpl implements UserService {
     private final UserRepo userRepo;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Override
     public CreateUserResponse createUser(CreateUserRequest user) {
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
         UserEntity newUser = UserEntity.builder()
                 .username(user.getUsername())
-                .password(user.getPassword())
+                .password(encodedPassword)
                 .email(user.getEmail())
                 .build();
         UserEntity isExisting = userRepo.findByUsernameIsLike(newUser.getUsername());
