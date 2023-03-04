@@ -12,6 +12,9 @@ import cz.vse.potravinyBEZ.service.RoleService;
 import cz.vse.potravinyBEZ.service.UserService;
 
 //Lombok
+import cz.vse.potravinyBEZ.service.exception.userService.EmailTakenException;
+import cz.vse.potravinyBEZ.service.exception.userService.PasswordTooShortException;
+import cz.vse.potravinyBEZ.service.exception.userService.UserAlreadyExistsException;
 import lombok.AllArgsConstructor;
 
 //Spring
@@ -40,34 +43,31 @@ public class UserServiceImpl implements UserService {
                 .build();
         UserEntity isExisting = userRepo.findByUsernameIsLike(newUser.getUsername());
         UserEntity isExistingByEmail = userRepo.findByEmailIsLike(newUser.getEmail());
-        if (Objects.isNull(isExisting)){
-            if (Objects.isNull(isExistingByEmail)){
-                userRepo.save(newUser);
-                RoleEntity isRoleExisting = roleRepo.findByNameIsLike("USER");
-                if (Objects.isNull(isRoleExisting)){
-                    CreateRoleRequest request = CreateRoleRequest.builder()
-                            .name("USER")
-                            .build();
-                    roleService.createRole(request);
-                }
-                AddRoleToUserRequest addRoleToUserRequest = AddRoleToUserRequest.builder()
-                        .role("USER")
-                        .username(newUser.getUsername())
-                        .build();
-                roleService.addRoleToUser(addRoleToUserRequest);
-                return CreateUserResponse.builder()
-                        .response("User: " + newUser.getUsername() + " has been created with id: " + userRepo.findByUsernameIsLike(newUser.getUsername()).getId())
-                        .build();
-            } else {
-                return CreateUserResponse.builder()
-                        .response("Email is already taken!")
-                        .build();
-            }
-        } else {
-            return CreateUserResponse.builder()
-                    .response("Username is already taken!")
-                    .build();
+        if (!Objects.isNull(isExisting)){
+            throw new UserAlreadyExistsException();
         }
+        if (!Objects.isNull(isExistingByEmail)){
+            throw new EmailTakenException();
+        }
+        if (user.getPassword().length() < 4){
+            throw new PasswordTooShortException();
+        }
+        userRepo.save(newUser);
+        RoleEntity isRoleExisting = roleRepo.findByNameIsLike("USER");
+        if (Objects.isNull(isRoleExisting)){
+            CreateRoleRequest request = CreateRoleRequest.builder()
+                    .name("USER")
+                    .build();
+            roleService.createRole(request);
+        }
+        AddRoleToUserRequest addRoleToUserRequest = AddRoleToUserRequest.builder()
+                .role("USER")
+                .username(newUser.getUsername())
+                .build();
+        roleService.addRoleToUser(addRoleToUserRequest);
+        return CreateUserResponse.builder()
+                .response("User: " + newUser.getUsername() + " has been created with id: " + userRepo.findByUsernameIsLike(newUser.getUsername()).getId())
+                .build();
     }
 
     @Override
