@@ -37,7 +37,7 @@ public class AccessTokenEncoderDecoderImpl implements AccessTokenEncoder, Access
         if (!CollectionUtils.isEmpty(accessToken.getRoles())) {
             claimsMap.put("roles", accessToken.getRoles());
         }
-        if (accessToken.getUserId() != null) {
+        if (accessToken.getUserId() != 0) {
             claimsMap.put("userId", accessToken.getUserId());
         }
 
@@ -62,7 +62,7 @@ public class AccessTokenEncoderDecoderImpl implements AccessTokenEncoder, Access
             return AccessToken.builder()
                     .subject(claims.getSubject())
                     .roles(roles)
-                    .userId(claims.get("userId", String.class))
+                    .userId(claims.get("userId", int.class))
                     .build();
         } catch (JwtException e) {
             throw new InvalidAccessTokenException(e.getMessage());
