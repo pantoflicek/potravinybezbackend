@@ -1,9 +1,14 @@
 package cz.vse.potravinyBEZ.service.impl;
 
 import cz.vse.potravinyBEZ.domain.converter.EntityToUserConverter;
+import cz.vse.potravinyBEZ.domain.role.AddRoleToUserRequest;
+import cz.vse.potravinyBEZ.domain.role.CreateRoleRequest;
 import cz.vse.potravinyBEZ.domain.user.*;
+import cz.vse.potravinyBEZ.repository.RoleRepo;
 import cz.vse.potravinyBEZ.repository.UserRepo;
+import cz.vse.potravinyBEZ.repository.entity.RoleEntity;
 import cz.vse.potravinyBEZ.repository.entity.UserEntity;
+import cz.vse.potravinyBEZ.service.RoleService;
 import cz.vse.potravinyBEZ.service.UserService;
 
 //Lombok
@@ -21,8 +26,9 @@ import java.util.Objects;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepo userRepo;
-
     private final PasswordEncoder passwordEncoder;
+    private final RoleRepo roleRepo;
+    private final RoleService roleService;
 
     @Override
     public CreateUserResponse createUser(CreateUserRequest user) {
@@ -37,6 +43,18 @@ public class UserServiceImpl implements UserService {
         if (Objects.isNull(isExisting)){
             if (Objects.isNull(isExistingByEmail)){
                 userRepo.save(newUser);
+                RoleEntity isRoleExisting = roleRepo.findByNameIsLike("USER");
+                if (Objects.isNull(isRoleExisting)){
+                    CreateRoleRequest request = CreateRoleRequest.builder()
+                            .name("USER")
+                            .build();
+                    roleService.createRole(request);
+                }
+                AddRoleToUserRequest addRoleToUserRequest = AddRoleToUserRequest.builder()
+                        .role("USER")
+                        .username(newUser.getUsername())
+                        .build();
+                roleService.addRoleToUser(addRoleToUserRequest);
                 return CreateUserResponse.builder()
                         .response("User: " + newUser.getUsername() + " has been created with id: " + userRepo.findByUsernameIsLike(newUser.getUsername()).getId())
                         .build();
