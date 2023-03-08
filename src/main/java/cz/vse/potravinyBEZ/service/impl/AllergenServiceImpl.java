@@ -121,7 +121,7 @@ public class AllergenServiceImpl implements AllergenService {
                         .response("Product does not have the specified allergen!")
                         .build();
             } else {
-                productAllergenRepo.save(entityToDelete);
+                productAllergenRepo.delete(entityToDelete);
                 return DeleteProductAllergenResponse.builder()
                         .response("Allergen: " + deletingAllergen.getName() + " was deleted from product: " + deletingProduct.getName())
                         .build();
