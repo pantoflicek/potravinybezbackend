@@ -45,6 +45,10 @@ public class ProductController {
     public FindByAllergenResponse findByAllergen(@Valid @NonNull @RequestBody FindByAllergenRequest request){
         return productService.findByAllergen(request);
     }
+    @GetMapping("/lastFive")
+    public FindLastFiveProductsResponse findLastFiveProducts(){
+        return productService.findLastFiveProducts();
+    }
 
     @PutMapping("/product")
     public GetProductByProductIdResponse getProductByProductId(@Valid @NonNull @RequestBody GetProductByProductIdRequest getProductByProductIdRequest){

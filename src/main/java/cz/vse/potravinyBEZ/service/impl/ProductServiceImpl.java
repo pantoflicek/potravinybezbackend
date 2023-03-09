@@ -127,4 +127,15 @@ public class ProductServiceImpl implements ProductService {
                 .products(foundProducts)
                 .build();
     }
+
+    @Override
+    public FindLastFiveProductsResponse findLastFiveProducts() {
+        List<ProductEntity> productEntities = productRepo.findLastFive();
+        List<Product> foundProducts = productEntities.stream()
+                .map(EntityToProductConverter::convert)
+                .toList();
+        return FindLastFiveProductsResponse.builder()
+                .products(foundProducts)
+                .build();
+    }
 }

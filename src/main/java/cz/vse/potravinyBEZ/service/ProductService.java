@@ -9,4 +9,5 @@ public interface ProductService {
     GetProductByProductIdResponse getProductByProductId(GetProductByProductIdRequest id);
     FindByNameResponse findByName(FindByNameRequest name);
     FindByAllergenResponse findByAllergen(FindByAllergenRequest allergenId);
+    FindLastFiveProductsResponse findLastFiveProducts();
 }
