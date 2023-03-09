@@ -41,6 +41,11 @@ public class ProductController {
         return productService.findByName(request);
     }
 
+    @PutMapping("/byAllergen")
+    public FindByAllergenResponse findByAllergen(@Valid @NonNull @RequestBody FindByAllergenRequest request){
+        return productService.findByAllergen(request);
+    }
+
     @PutMapping("/product")
     public GetProductByProductIdResponse getProductByProductId(@Valid @NonNull @RequestBody GetProductByProductIdRequest getProductByProductIdRequest){
         return productService.getProductByProductId(getProductByProductIdRequest);

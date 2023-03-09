@@ -116,4 +116,15 @@ public class ProductServiceImpl implements ProductService {
                 .products(foundProducts)
                 .build();
     }
+
+    @Override
+    public FindByAllergenResponse findByAllergen(FindByAllergenRequest allergenId) {
+        List<ProductEntity> productEntities = productRepo.findByAllergen(allergenId.getAllergenId());
+        List<Product> foundProducts = productEntities.stream()
+                .map(EntityToProductConverter::convert)
+                .toList();
+        return FindByAllergenResponse.builder()
+                .products(foundProducts)
+                .build();
+    }
 }
