@@ -105,4 +105,15 @@ public class ProductServiceImpl implements ProductService {
                     .build();
         }
     }
+
+    @Override
+    public FindByNameResponse findByName(FindByNameRequest name) {
+        List<ProductEntity> productEntities = productRepo.findByNameIsLIke(name.getName());
+        List<Product> foundProducts = productEntities.stream()
+                .map(EntityToProductConverter::convert)
+                .toList();
+        return FindByNameResponse.builder()
+                .products(foundProducts)
+                .build();
+    }
 }

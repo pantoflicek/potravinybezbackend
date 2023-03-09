@@ -36,6 +36,11 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
+    @PutMapping
+    public FindByNameResponse findByName(@Valid @NonNull @RequestBody FindByNameRequest request){
+        return productService.findByName(request);
+    }
+
     @PutMapping("/product")
     public GetProductByProductIdResponse getProductByProductId(@Valid @NonNull @RequestBody GetProductByProductIdRequest getProductByProductIdRequest){
         return productService.getProductByProductId(getProductByProductIdRequest);

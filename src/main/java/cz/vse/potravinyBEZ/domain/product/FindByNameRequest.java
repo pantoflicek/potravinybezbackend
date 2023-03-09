@@ -11,7 +11,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DeleteProductRequest {
+public class FindByNameRequest {
     @NotBlank
     @Length(min = 2, max = 200)
     private String name;
