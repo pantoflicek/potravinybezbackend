@@ -46,7 +46,7 @@ public class TagController {
         return tagService.getAllProductTags(getAllProductTagsRequest);
     }
 
-    @DeleteMapping("/productAllergenDelete")
+    @DeleteMapping("/productTagDelete")
     public DeleteProductTagResponse deleteProductTag(@Valid @NonNull @RequestBody DeleteProductTagRequest deleteProductTagRequest){
         return tagService.deleteProductTag(deleteProductTagRequest);
     }
