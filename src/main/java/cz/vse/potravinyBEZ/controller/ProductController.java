@@ -36,6 +36,20 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
+    @PutMapping
+    public FindByNameResponse findByName(@Valid @NonNull @RequestBody FindByNameRequest request){
+        return productService.findByName(request);
+    }
+
+    @PutMapping("/byAllergen")
+    public FindByAllergenResponse findByAllergen(@Valid @NonNull @RequestBody FindByAllergenRequest request){
+        return productService.findByAllergen(request);
+    }
+    @GetMapping("/lastFive")
+    public FindLastFiveProductsResponse findLastFiveProducts(){
+        return productService.findLastFiveProducts();
+    }
+
     @PutMapping("/product")
     public GetProductByProductIdResponse getProductByProductId(@Valid @NonNull @RequestBody GetProductByProductIdRequest getProductByProductIdRequest){
         return productService.getProductByProductId(getProductByProductIdRequest);

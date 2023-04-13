@@ -105,4 +105,37 @@ public class ProductServiceImpl implements ProductService {
                     .build();
         }
     }
+
+    @Override
+    public FindByNameResponse findByName(FindByNameRequest name) {
+        List<ProductEntity> productEntities = productRepo.findByNameIsLIke(name.getName());
+        List<Product> foundProducts = productEntities.stream()
+                .map(EntityToProductConverter::convert)
+                .toList();
+        return FindByNameResponse.builder()
+                .products(foundProducts)
+                .build();
+    }
+
+    @Override
+    public FindByAllergenResponse findByAllergen(FindByAllergenRequest allergenId) {
+        List<ProductEntity> productEntities = productRepo.findByAllergen(allergenId.getAllergenId());
+        List<Product> foundProducts = productEntities.stream()
+                .map(EntityToProductConverter::convert)
+                .toList();
+        return FindByAllergenResponse.builder()
+                .products(foundProducts)
+                .build();
+    }
+
+    @Override
+    public FindLastFiveProductsResponse findLastFiveProducts() {
+        List<ProductEntity> productEntities = productRepo.findLastFive();
+        List<Product> foundProducts = productEntities.stream()
+                .map(EntityToProductConverter::convert)
+                .toList();
+        return FindLastFiveProductsResponse.builder()
+                .products(foundProducts)
+                .build();
+    }
 }

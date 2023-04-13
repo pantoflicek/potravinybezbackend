@@ -7,4 +7,7 @@ public interface ProductService {
     GetAllProductsResponse getAllProducts();
     DeleteProductResponse deleteProduct(DeleteProductRequest product);
     GetProductByProductIdResponse getProductByProductId(GetProductByProductIdRequest id);
+    FindByNameResponse findByName(FindByNameRequest name);
+    FindByAllergenResponse findByAllergen(FindByAllergenRequest allergenId);
+    FindLastFiveProductsResponse findLastFiveProducts();
 }
