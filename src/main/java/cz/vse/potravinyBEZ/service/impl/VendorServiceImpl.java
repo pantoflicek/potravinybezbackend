@@ -27,6 +27,12 @@ public class VendorServiceImpl implements  VendorService{
                 .name(vendor.getName())
                 .website(vendor.getWebsite())
                 .logoPath(vendor.getLogoPath())
+                .address(vendor.getAddress())
+                .mail(vendor.getMail())
+                .phone(vendor.getPhone())
+                .contactPerson(vendor.getContactPerson())
+                .openingHours(vendor.getOpeningHours())
+                .additionalInfo(vendor.getAdditionalInfo())
                 .build();
         VendorEntity isExisting = vendorRepo.findByNameIsLike(newVendor.getName());
         if (Objects.isNull(isExisting)){
@@ -63,6 +69,21 @@ public class VendorServiceImpl implements  VendorService{
             vendorRepo.delete(vendorToDelete);
             return DeleteVendorResponse.builder()
                     .response("Vendor: " + vendorToDelete.getName() + " has been delete!")
+                    .build();
+        }
+    }
+
+    @Override
+    public GetVendorByIdResponse getVendorById(GetVendorByIdRequest id) {
+        VendorEntity vendorEntity = vendorRepo.findByIdIsLike(id.getId());
+        if (Objects.isNull(vendorEntity)){
+            return GetVendorByIdResponse.builder()
+                    .vendor(null)
+                    .build();
+        } else {
+            Vendor vendor = EntityToVendorConverter.convert(vendorEntity);
+            return GetVendorByIdResponse.builder()
+                    .vendor(vendor)
                     .build();
         }
     }

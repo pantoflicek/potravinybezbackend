@@ -6,4 +6,5 @@ public interface VendorService {
     CreateVendorResponse createVendor(CreateVendorRequest vendor);
     GetAllVendorsResponse getAllVendors();
     DeleteVendorResponse deleteVendor(DeleteVendorRequest vendor);
+    GetVendorByIdResponse getVendorById(GetVendorByIdRequest id);
 }

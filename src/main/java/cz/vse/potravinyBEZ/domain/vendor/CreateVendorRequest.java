@@ -17,4 +17,16 @@ public class CreateVendorRequest {
     private String logoPath;
     @Length(min = 2, max = 200)
     private String website;
+    @Length(min = 2, max = 200)
+    private String address;
+    @Length(min = 2, max = 45)
+    private String mail;
+    @Length(min = 2, max = 200)
+    private String phone;
+    @Length(min = 2, max = 200)
+    private String contactPerson;
+    @Length(min = 2, max = 1024)
+    private String openingHours;
+    @Length(min = 2, max = 1024)
+    private String additionalInfo;
 }

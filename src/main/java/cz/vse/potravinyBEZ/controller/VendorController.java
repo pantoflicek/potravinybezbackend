@@ -35,4 +35,9 @@ public class VendorController {
     public GetAllVendorsResponse getAllVendors(){
         return vendorService.getAllVendors();
     }
+
+    @PutMapping
+    public GetVendorByIdResponse getVendorById(@Valid @NonNull @RequestBody GetVendorByIdRequest getVendorByIdRequest){
+        return vendorService.getVendorById(getVendorByIdRequest);
+    }
 }
