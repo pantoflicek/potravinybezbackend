@@ -4,6 +4,8 @@ import cz.vse.potravinyBEZ.domain.vendor.Vendor;
 
 import lombok.*;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @Builder
@@ -11,6 +13,9 @@ import lombok.*;
 public class Offer {
     private int id;
     private int price;
+    private Date dateAdded;
+    private Date dateTo;
+    private Date dateFrom;
     private Product product;
     private Vendor vendor;
 }
