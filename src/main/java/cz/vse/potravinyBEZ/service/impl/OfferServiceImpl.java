@@ -34,6 +34,9 @@ public class OfferServiceImpl implements OfferService {
         ProductEntity addingProduct = productRepo.findByNameIsLike(offer.getProduct());
         OfferEntity newOffer = OfferEntity.builder()
                 .price(offer.getPrice())
+                .dateAdded(offer.getDateAdded())
+                .dateTo(offer.getDateTo())
+                .dateFrom(offer.getDateFrom())
                 .product(addingProduct)
                 .vendor(addingVendor)
                 .build();
@@ -96,7 +99,13 @@ public class OfferServiceImpl implements OfferService {
         } else {
             List<OfferEntity> offerEntities = offerRepo.findByProductId(product.getId());
             List<Offer> offers = offerEntities.stream()
-                    .map(offerEntity -> new Offer(offerEntity.getId(), offerEntity.getPrice(), EntityToProductConverter.convert(offerEntity.getProduct()), EntityToVendorConverter.convert(offerEntity.getVendor())))
+                    .map(offerEntity -> new Offer(offerEntity.getId(),
+                            offerEntity.getPrice(),
+                            offerEntity.getDateAdded(),
+                            offerEntity.getDateTo(),
+                            offerEntity.getDateFrom(),
+                            EntityToProductConverter.convert(offerEntity.getProduct()),
+                            EntityToVendorConverter.convert(offerEntity.getVendor())))
                     .toList();
             return GetAllProductOffersResponse.builder()
                     .offers(offers)
