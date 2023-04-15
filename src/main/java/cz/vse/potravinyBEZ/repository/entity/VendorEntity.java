@@ -23,25 +23,25 @@ public class VendorEntity {
     @Length(min = 2, max = 1024)
     @Column(name = "logo_path")
     private String logoPath;
-    @Length(min = 2, max = 200)
+    @Length(max = 200)
     @Column(name = "website")
     private String website;
-    @Length(min = 2, max = 200)
+    @Length(max = 200)
     @Column(name = "address")
     private String address;
-    @Length(min = 2, max = 45)
+    @Length(max = 45)
     @Column(name = "mail")
     private String mail;
     @Column(name = "phone")
-    @Length(min = 2, max = 200)
+    @Length(max = 200)
     private String phone;
-    @Length(min = 2, max = 200)
+    @Length(max = 200)
     @Column(name = "contact_person")
     private String contactPerson;
-    @Length(min = 2, max = 1024)
+    @Length(max = 1024)
     @Column(name = "opening_hours")
     private String openingHours;
-    @Length(min = 2, max = 1024)
+    @Length(max = 1024)
     @Column(name = "additional_info")
     private String additionalInfo;
 }
