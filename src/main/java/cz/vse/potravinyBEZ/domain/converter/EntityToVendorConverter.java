@@ -12,6 +12,12 @@ public final class EntityToVendorConverter {
                 .name(vendorEntity.getName())
                 .logoPath(vendorEntity.getLogoPath())
                 .website(vendorEntity.getWebsite())
+                .address(vendorEntity.getAddress())
+                .mail(vendorEntity.getMail())
+                .phone(vendorEntity.getPhone())
+                .contactPerson(vendorEntity.getContactPerson())
+                .openingHours(vendorEntity.getOpeningHours())
+                .additionalInfo(vendorEntity.getAdditionalInfo())
                 .build();
     }
 }

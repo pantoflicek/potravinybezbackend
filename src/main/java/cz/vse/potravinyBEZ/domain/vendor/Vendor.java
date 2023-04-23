@@ -11,4 +11,10 @@ public class Vendor {
     private String name;
     private String logoPath;
     private String website;
+    private String address;
+    private String mail;
+    private String phone;
+    private String contactPerson;
+    private String openingHours;
+    private String additionalInfo;
 }
