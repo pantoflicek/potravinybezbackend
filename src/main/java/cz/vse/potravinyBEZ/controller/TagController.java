@@ -34,8 +34,8 @@ public class TagController {
     }
 
     @GetMapping
-    @IsAuthenticated
-    @RolesAllowed({"ROLE_ADMIN"})
+    //@IsAuthenticated
+    //@RolesAllowed({"ROLE_ADMIN"})
     public GetAllTagsResponse getAllTags(){
         return tagService.getAllTags();
     }
