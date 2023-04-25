@@ -1,8 +1,10 @@
 package cz.vse.potravinyBEZ.controller;
 
 //Persistence
+import cz.vse.potravinyBEZ.configuration.security.isAuth.IsAuthenticated;
 import cz.vse.potravinyBEZ.domain.tag.*;
 import cz.vse.potravinyBEZ.service.TagService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -32,6 +34,8 @@ public class TagController {
     }
 
     @GetMapping
+    @IsAuthenticated
+    @RolesAllowed({"ROLE_ADMIN"})
     public GetAllTagsResponse getAllTags(){
         return tagService.getAllTags();
     }
