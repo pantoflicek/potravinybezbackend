@@ -41,10 +41,16 @@ public class ProductController {
         return productService.findByName(request);
     }
 
+    @PutMapping("/specificName")
+    public FindByNameSpecificResponse findByNameSpecific(@Valid @NonNull @RequestBody FindByNameSpecificRequest request){
+        return productService.findByNameSpecific(request);
+    }
+
     @PutMapping("/byAllergen")
     public FindByAllergenResponse findByAllergen(@Valid @NonNull @RequestBody FindByAllergenRequest request){
         return productService.findByAllergen(request);
     }
+
     @GetMapping("/lastFive")
     public FindLastFiveProductsResponse findLastFiveProducts(){
         return productService.findLastFiveProducts();

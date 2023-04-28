@@ -118,6 +118,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public FindByNameSpecificResponse findByNameSpecific(FindByNameSpecificRequest name) {
+        ProductEntity productEntity = productRepo.findByNameSpecificProduct(name.getName());
+        Product foundProduct = EntityToProductConverter.convert(productEntity);
+        return FindByNameSpecificResponse.builder()
+                .product(foundProduct)
+                .build();
+    }
+
+    @Override
     public FindByAllergenResponse findByAllergen(FindByAllergenRequest allergenId) {
         List<ProductEntity> productEntities = productRepo.findByAllergen(allergenId.getAllergenId());
         List<Product> foundProducts = productEntities.stream()
