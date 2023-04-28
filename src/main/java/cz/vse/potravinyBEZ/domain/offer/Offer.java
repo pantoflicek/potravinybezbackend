@@ -12,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Offer {
     private int id;
-    private int price;
+    private float price;
     private Date dateAdded;
     private Date dateTo;
     private Date dateFrom;

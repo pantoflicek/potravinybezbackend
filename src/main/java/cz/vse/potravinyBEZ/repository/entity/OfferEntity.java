@@ -17,7 +17,7 @@ public class OfferEntity {
     @Column(name = "id")
     private int id;
     @Column(name = "price")
-    private int price;
+    private float price;
     @Column(name = "date_added")
     private Date dateAdded;
     @Column(name = "date_to")

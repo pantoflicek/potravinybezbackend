@@ -13,11 +13,11 @@ public interface OfferRepo extends JpaRepository<OfferEntity, Long> {
 
     //Find the lowest offer
     @Query("SELECT u.price FROM OfferEntity u WHERE u.product.id = ?1 ORDER BY u.price ASC FETCH FIRST 1 ROW ONLY")
-    Integer findLowestByProductId(Integer id);
+    Float findLowestByProductId(Integer id);
 
     //Find the highest offer
     @Query("SELECT u.price FROM OfferEntity u WHERE u.product.id = ?1 ORDER BY u.price DESC FETCH FIRST 1 ROW ONLY")
-    Integer findHighestByProductId(Integer id);
+    Float findHighestByProductId(Integer id);
 
     @Query("SELECT u FROM OfferEntity u WHERE u.product.id = ?1 AND u.vendor.id = ?2")
     OfferEntity findByProductIdAndVendorId(Integer productId, Integer vendorId);

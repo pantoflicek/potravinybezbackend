@@ -23,5 +23,5 @@ public class CreateOfferRequest {
     private Date dateAdded;
     private Date dateTo;
     private Date dateFrom;
-    private int price;
+    private float price;
 }

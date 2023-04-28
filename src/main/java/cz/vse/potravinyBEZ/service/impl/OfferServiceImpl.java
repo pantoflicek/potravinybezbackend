@@ -120,7 +120,7 @@ public class OfferServiceImpl implements OfferService {
             System.out.println("No product found");
             return null;
         } else {
-            Integer lowestOffer = offerRepo.findLowestByProductId(product.getId());
+            Float lowestOffer = offerRepo.findLowestByProductId(product.getId());
             if (lowestOffer == null){
                 return null;
             } else {
@@ -138,7 +138,7 @@ public class OfferServiceImpl implements OfferService {
             System.out.println("No product found");
             return null;
         } else {
-            Integer highestOffer = offerRepo.findHighestByProductId(product.getId());
+            Float highestOffer = offerRepo.findHighestByProductId(product.getId());
             if (highestOffer == null){
                 return null;
             } else {
