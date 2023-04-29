@@ -84,7 +84,7 @@ public class OfferServiceImpl implements OfferService {
             } else {
                 offerRepo.delete(offerToDelete);
                 return DeleteOfferResponse.builder()
-                        .response("Offer form vendor: " + deletingVendor.getName() + " has been deleted from product: " + deletingProduct.getName())
+                        .response("Offer from vendor: " + deletingVendor.getName() + " has been deleted from product: " + deletingProduct.getName())
                         .build();
             }
         }
