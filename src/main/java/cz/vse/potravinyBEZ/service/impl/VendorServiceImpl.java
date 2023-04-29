@@ -68,7 +68,7 @@ public class VendorServiceImpl implements  VendorService{
         } else {
             vendorRepo.delete(vendorToDelete);
             return DeleteVendorResponse.builder()
-                    .response("Vendor: " + vendorToDelete.getName() + " has been delete!")
+                    .response("Vendor: " + vendorToDelete.getName() + " has been deleted!")
                     .build();
         }
     }
