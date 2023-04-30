@@ -49,7 +49,7 @@ public class ReviewServiceImpl implements ReviewService {
             if (Objects.isNull(isExisting)){
                 reviewRepo.save(newReview);
                 return CreateReviewResponse.builder()
-                        .response("Product " + addingProduct.getName() + " has new review from user: " + addingUser.getUsername())
+                        .response("Product: " + addingProduct.getName() + " has new review from user: " + addingUser.getUsername())
                         .build();
             } else {
                 return CreateReviewResponse.builder()

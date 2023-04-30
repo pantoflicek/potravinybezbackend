@@ -6,10 +6,10 @@ import cz.vse.potravinyBEZ.repository.entity.ProducerEntity;
 public final class EntityToProducerConverter {
     public EntityToProducerConverter(){
     }
-    public static Producer convert(ProducerEntity roleEntity){
+    public static Producer convert(ProducerEntity producerEntity){
         return Producer.builder()
-                .id(roleEntity.getId())
-                .name(roleEntity.getName())
+                .id(producerEntity.getId())
+                .name(producerEntity.getName())
                 .build();
     }
 }
