@@ -103,17 +103,50 @@ class ProductServiceImplTest {
 
     @Test
     void findByName() {
+        when(productRepoMock.findByNameIsLIke("product")).thenReturn(List.of(productEntity));
+        FindByNameRequest request = FindByNameRequest.builder()
+                .name("product")
+                .build();
+        FindByNameResponse er = FindByNameResponse.builder()
+                .products(List.of(product))
+                .build();
+        FindByNameResponse ar = productService.findByName(request);
+        assertEquals(er,ar);
     }
 
     @Test
     void findByNameSpecific() {
+        when(productRepoMock.findByNameSpecificProduct("product")).thenReturn(productEntity);
+        FindByNameSpecificRequest request = FindByNameSpecificRequest.builder()
+                .name("product")
+                .build();
+        FindByNameSpecificResponse er = FindByNameSpecificResponse.builder()
+                .product(product)
+                .build();
+        FindByNameSpecificResponse ar = productService.findByNameSpecific(request);
+        assertEquals(er,ar);
     }
 
     @Test
     void findByAllergen() {
+        when(productRepoMock.findByAllergen(1)).thenReturn(List.of(productEntity));
+        FindByAllergenRequest request = FindByAllergenRequest.builder()
+                .allergenId(1)
+                .build();
+        FindByAllergenResponse er = FindByAllergenResponse.builder()
+                .products(List.of(product))
+                .build();
+        FindByAllergenResponse ar = productService.findByAllergen(request);
+        assertEquals(er,ar);
     }
 
     @Test
     void findLastFiveProducts() {
+        when(productRepoMock.findLastFive()).thenReturn(List.of(productEntity));
+        FindLastFiveProductsResponse er = FindLastFiveProductsResponse.builder()
+                .products(List.of(product))
+                .build();
+        FindLastFiveProductsResponse ar = productService.findLastFiveProducts();
+        assertEquals(er,ar);
     }
 }
