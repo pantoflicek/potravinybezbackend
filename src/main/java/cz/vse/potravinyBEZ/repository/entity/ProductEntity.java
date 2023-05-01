@@ -28,7 +28,7 @@ public class ProductEntity {
     @Column(name = "description_long")
     private String descriptionLong;
     @Column(name = "weight")
-    private int weight;
+    private float weight;
     @Length(min = 2, max = 1024)
     @Column(name = "ingredients")
     private String ingredients;
@@ -36,17 +36,17 @@ public class ProductEntity {
     @JoinColumn(name = "producer_id")
     private ProducerEntity producer;
     @Column(name = "energy")
-    private int energy;
+    private float energy;
     @Column(name = "fat")
-    private int fat;
+    private float fat;
     @Column(name = "carbohydrate")
-    private int carbohydrate;
+    private float carbohydrate;
     @Column(name = "sugars")
-    private int sugars;
+    private float sugars;
     @Column(name = "fibre")
-    private int fibre;
+    private float fibre;
     @Column(name = "protein")
-    private int protein;
+    private float protein;
     @Column(name = "salt")
-    private int salt;
+    private float salt;
 }
