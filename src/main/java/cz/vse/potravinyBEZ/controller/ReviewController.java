@@ -1,6 +1,7 @@
 package cz.vse.potravinyBEZ.controller;
 
 //Persistence
+import cz.vse.potravinyBEZ.configuration.security.isAuth.IsAuthenticated;
 import cz.vse.potravinyBEZ.domain.review.*;
 import cz.vse.potravinyBEZ.service.ReviewService;
 import jakarta.validation.Valid;
@@ -20,11 +21,13 @@ public class ReviewController {
     private final ReviewService reviewService;
 
     @PostMapping
+    @IsAuthenticated
     public CreateReviewResponse createReview(@Valid @NonNull @RequestBody CreateReviewRequest createReviewRequest){
         return reviewService.createReview(createReviewRequest);
     }
 
     @DeleteMapping
+    @IsAuthenticated
     public DeleteReviewResponse deleteReview(@Valid @NonNull @RequestBody DeleteReviewRequest deleteReviewRequest){
         return reviewService.deleteReview(deleteReviewRequest);
     }
