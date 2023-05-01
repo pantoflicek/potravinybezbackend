@@ -1,9 +1,11 @@
 package cz.vse.potravinyBEZ.controller;
 
+import cz.vse.potravinyBEZ.configuration.security.isAuth.IsAuthenticated;
 import cz.vse.potravinyBEZ.domain.producer.*;
 import cz.vse.potravinyBEZ.service.ProducerService;
 
 //Persistence
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -22,12 +24,15 @@ public class ProducerController {
     private final ProducerService producerService;
 
     @PostMapping
+    @IsAuthenticated
     public CreateProducerResponse createProducer(@Valid @NonNull @RequestBody CreateProducerRequest createProducerRequest){
         return producerService.createProducer(createProducerRequest);
     }
 
     @DeleteMapping
     @Transactional
+    @IsAuthenticated
+    @RolesAllowed({"ROLE_ADMIN"})
     public DeleteProducerResponse deleteProducer(@Valid @NonNull @RequestBody DeleteProducerRequest deleteProducerRequest){
         return producerService.deleteProducerByName(deleteProducerRequest);
     }
