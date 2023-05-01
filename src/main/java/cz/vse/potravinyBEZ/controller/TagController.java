@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.*;
 public class TagController {
     private final TagService tagService;
 
+    @IsAuthenticated
+    @RolesAllowed({"ROLE_ADMIN"})
     @PostMapping
     public CreateTagResponse createTag(@Valid @NonNull @RequestBody CreateTagRequest createTagRequest){
         return tagService.createTag(createTagRequest);
@@ -29,18 +31,22 @@ public class TagController {
 
     @DeleteMapping
     @Transactional
+    @IsAuthenticated
+    @RolesAllowed({"ROLE_ADMIN"})
     public DeleteTagResponse deleteTag(@Valid @NonNull @RequestBody DeleteTagRequest deleteTagRequest){
         return tagService.deleteTag(deleteTagRequest);
     }
 
     @GetMapping
-    //@IsAuthenticated
-    //@RolesAllowed({"ROLE_ADMIN"})
+    @IsAuthenticated
+    @RolesAllowed({"ROLE_ADMIN"})
     public GetAllTagsResponse getAllTags(){
         return tagService.getAllTags();
     }
 
     @PutMapping("/addTag")
+    @IsAuthenticated
+    @RolesAllowed({"ROLE_ADMIN"})
     public AddTagToProductResponse addTagToProduct(@Valid @NonNull @RequestBody AddTagToProductRequest addTagToProductRequest){
         return tagService.addTagToProduct(addTagToProductRequest);
     }
@@ -51,6 +57,8 @@ public class TagController {
     }
 
     @DeleteMapping("/productTagDelete")
+    @IsAuthenticated
+    @RolesAllowed({"ROLE_ADMIN"})
     public DeleteProductTagResponse deleteProductTag(@Valid @NonNull @RequestBody DeleteProductTagRequest deleteProductTagRequest){
         return tagService.deleteProductTag(deleteProductTagRequest);
     }
