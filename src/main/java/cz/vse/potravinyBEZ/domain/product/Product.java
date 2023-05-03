@@ -13,14 +13,14 @@ public class Product {
     private String imagePath;
     private String descriptionShort;
     private String descriptionLong;
-    private int weight;
+    private float weight;
     private String ingredients;
     private Producer producer;
-    private int energy;
-    private int fat;
-    private int carbohydrate;
-    private int sugars;
-    private int fibre;
-    private int protein;
-    private int salt;
+    private float energy;
+    private float fat;
+    private float carbohydrate;
+    private float sugars;
+    private float fibre;
+    private float protein;
+    private float salt;
 }

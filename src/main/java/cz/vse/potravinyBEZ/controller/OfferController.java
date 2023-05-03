@@ -1,8 +1,10 @@
 package cz.vse.potravinyBEZ.controller;
 
 //Persistence
+import cz.vse.potravinyBEZ.configuration.security.isAuth.IsAuthenticated;
 import cz.vse.potravinyBEZ.domain.offer.*;
 import cz.vse.potravinyBEZ.service.OfferService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -21,11 +23,14 @@ public class OfferController {
     private final OfferService offerService;
 
     @PostMapping
+    @IsAuthenticated
     public CreateOfferResponse createOffer(@Valid @NonNull @RequestBody CreateOfferRequest createOfferRequest){
         return offerService.createOffer(createOfferRequest);
     }
 
     @DeleteMapping
+    @IsAuthenticated
+    @RolesAllowed({"ROLE_ADMIN"})
     public DeleteOfferResponse deleteOffer(@Valid @NonNull @RequestBody DeleteOfferRequest deleteOffer){
         return offerService.deleteOffer(deleteOffer);
     }
